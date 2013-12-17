@@ -1,0 +1,24 @@
+<div style = "margin-left:150px">
+  <h3><div><font color="#800000"><b>Shopping Cart Items--To Buy Now</b></font><div><h3>
+  <table>
+    <tr>
+      <td style = "border: 1px solid black; padding: 50px;">
+        <%@cart.pictures.each do |photo|%>
+          <div style = "width:100px">
+            <h5><div><font color="#800000"><%= "Product: #{@cart.product_name}"%></font></div>
+            <%= image_tag photo.image.url(:small) %>
+          </div>
+        <%end%>
+        <h5><div><font color="#800000">Price</font>
+            </div><br/>
+        <div><%= @cart.price%></div>
+        <h5><div><font color="#800000">Quantity</font>
+          <%=@cart.quantity%></div>
+      </td>
+    </tr>
+  </table><br/>
+  <div style = "margin-left:50px;">
+    <%= link_to "Order Now", new_order_path, :class => 'btn btn-primary'%>
+  </div>
+</div><br/>
+

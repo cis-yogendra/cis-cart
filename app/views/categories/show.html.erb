@@ -1,0 +1,41 @@
+<div style = "margin-left:20px">
+	<table>
+		<tr>
+			<div><font color="#800000"><%= "Category Name: #{@category.name}"%></font></div><br/>
+			<% @category.products.each_with_index do |product,index| %>
+				<% if (index%3) == 0 %>
+		    	<% end %>
+				<td style = "border: 1px solid black; padding: 50px;">
+					<div><font color="#800000"><%= "Product_name: #{product.product_name}"%></font></div><br/>
+					<% product.pictures.each do |photo| %>
+						<div style = "width:100px">
+							<%= link_to image_tag(photo.image(:large)), product_path(product) %>
+						</div>
+					<%end%>
+	            	<%= product.description%>
+					<%= product.price%>
+				</td>
+			<%end%>
+			<h3>Number of Products{<%= @category.products.count %>}</h3>
+		</tr>
+		<tr>
+			<% @category.sub_categories.each_with_index do |sub_category,index|%>
+				<% sub_category.products.each do |product| %>
+					<% if (index%4) == 0%>
+					<%end%>
+						<td style = "border: 1px solid black; padding: 50px;">
+							<div><font color="#800000"><%= "Product_name: #{product.product_name}"%></font></div><br/>
+							<% product.pictures.each do |photo| %>
+								<div style = "width:100px">
+									<%= link_to image_tag(photo.image.url(:large)), product_path(product) %>
+								</div>
+							<%end%>
+			            	<%= product.description%>
+							<%= product.price%>
+						</td>
+				<%end%>
+			<%end%>	
+		</tr>
+	</table>
+</div>
+

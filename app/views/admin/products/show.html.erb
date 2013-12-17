@@ -1,0 +1,14 @@
+<div style = "margin-left:20px">
+	<% @product.pictures.each do |photo| %>
+		<%= image_tag photo.image.url(:large) %>
+	<%end%>
+	
+	<p>
+	  <b>Price:</b>
+	  <%= @product.price %>
+	</p>
+	<p>
+		<b>Description:</b>
+		<%= @product.description %>
+	</p>
+</div>

@@ -1,0 +1,23 @@
+<h4><font color="#A52A2A">User's Profile </font></h4>
+
+	<table>
+		
+	<tr>
+		<td>
+			<p>
+			  <b>Email:</b>
+			  <%= @profile.email %>
+			</p>
+		</td>
+	</tr>
+	<%@profile.pictures.each do |photo|%>
+		<tr>
+			<td>
+				<p>
+				  <b>image:</b>
+				  <%= image_tag photo.image.url(:small) %>
+				</p>
+			</td>
+		</tr>
+	<%end%>
+

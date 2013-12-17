@@ -1,0 +1,52 @@
+<%= form_for (@order) do |f|%>
+
+	<div class = "field">
+	    <%= f.label :name %><br/>
+	    <%= f.text_field :name%>
+  	</div>
+
+  	<div class = "field">
+	    <%= f.label :email %><br/>
+	    <%= f.text_field :email%>
+  	</div>
+
+  	<div class = "field">
+  		<%= f.label :pay_type %>
+	    <%= f.select :pay_type, Order::PAYMENT_TYPES,
+					 :prompt => 'Select a payment method' %>
+  	</div>
+
+    <div class = "field">
+        <%= f.label :address %><br/>
+	    <%= f.text_field :address, :class => 'address-picker-input'%>
+	</div>
+
+  	<div class = "field">
+    	<%= f.label :address_latitude %><br/>
+    	<%= f.text_field :address_latitude, :readonly => true, :class => 'address-picker-latitude'%>
+  	</div>
+
+  	<div class = "field">
+    	<%= f.label :address_longitude %><br/>
+    	<%= f.text_field :address_longitude, :readonly => true, :class => 'address-picker-longitude'%>
+  	</div>
+
+  	<div class = "field">
+    	<%= f.label :address_locality %><br/>
+    	<%= f.text_field :address_locality, :readonly => true, :class => 'address-picker-locality'%>
+  	</div>
+
+  	<div class="field">
+    	<%= f.label :address_country %><br />
+    	<%= f.text_field :address_country, :readonly => true, :class => 'address-picker-country' %>
+  	</div>
+     
+  	<div class = "field">
+    	<%= f.label :Terms_and_condition%>
+    	<%= f.check_box :accepted_terms_and_conditions, :readonly => true %>
+  	</div>
+  
+  	<div class="form-actions">
+    	<%= f.button :submit %>
+  	</div>
+<%end%>

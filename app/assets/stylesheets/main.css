@@ -1,0 +1,9 @@
+.reviewsbar .buttons .no {
+    float: left;
+    background: url(/assets/no.jpg) 0 -334px no-repeat;
+  }
+  
+.reviewsbar .buttons .yes {
+    float: right;
+    background: url(/assets/yes.jpg) 0 -353px no-repeat;
+}

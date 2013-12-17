@@ -1,0 +1,27 @@
+<div style = "float: right;margin-right: 150px;">
+	<p>
+	  <b>Price:</b>
+	  <%= @product.price %>
+	</p>
+	<p>
+		<b>Description:</b>
+		<%= @product.description %>
+	</p>
+
+	<div style = "margin-left:70px">
+		<%= link_to "Add Cart", cart_path(@product), :class => 'btn btn-primary'%>
+	</div>
+</div>
+
+<% @product.pictures.each do |photo| %>
+	<div style = "margin-left:20px">	
+		<h5><div><font color="#800000"><%= "Product Name:-- #{@product.product_name}"%></font></div></h5><br/>
+		<p>
+			<%= image_tag photo.image.url(:large) %>
+		</p>
+	</div>
+<%end%>
+
+	
+<div id = "edit_form"></div>
+

@@ -1,0 +1,28 @@
+<h2>Sign up</h2>
+
+<%= nested_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email %></div>
+
+  <%= f.fields_for :pictures do |photo| %>
+    <p>
+      <%= photo.label :image %>
+      <%= photo.file_field :image %>
+      <%= photo.link_to_remove "Remove this image" %>
+    </p>
+  <%end%>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <p><%= f.link_to_add "Add a image", :pictures %></p>
+
+  <div><%= f.submit "Sign up" %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>

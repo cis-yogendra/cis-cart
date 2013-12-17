@@ -1,0 +1,48 @@
+<div style = "margin-left:50px">
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CISShoppingCart</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag :defaults, "nested_form" %>
+  <%= csrf_meta_tags %>
+
+</head>
+<body style="background: #EEEEEE;">
+  <div style = "float: right;margin-right: 23px;">
+  <% if user_signed_in? %>  <%= current_user.email %> &nbsp; |
+
+ <%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => 'btn btn-primary' %> 
+<% else %> 
+<%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %> 
+<% end %> 
+</div>
+<div> <%= flash[:notice]%>
+</div>
+<div class='left'>
+  <%= render :partial => 'admin/shared/left_panel'%>     
+</div>
+
+<div class='main_container'>
+  <%= yield%>
+</div>
+</body>
+</html>
+
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+      </a>
+      <h4><%= link_to "Admin Dashboard", admin_root_path, :class => 'btn btn-primary'%></h4>
+      <div class="nav-collapse">
+        <ul class="nav">
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

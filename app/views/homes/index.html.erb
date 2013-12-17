@@ -1,0 +1,26 @@
+<div style = "margin-left:150px">
+<h2><i><u><font color="#800000">List of Products :-</font></u></i></h2>	
+	<table cellspacing="10">
+		<tr>
+			<% @products.each_with_index do |product,index| %>
+				<% if (index%3) == 0 %>
+					</tr>
+					<tr>
+		    	<% end %>
+					<td style = "border: 1px solid black; padding: 50px;">
+						<div><font color="#800000"><%= (product.product_name)%></font></div><br/>
+						<% product.pictures.each do |photo| %>
+							<div style = "width:100px">
+								<%= link_to image_tag(photo.image.url(:small)), product_path(product) %>
+							</div><br/>
+						<% end %>
+						<div><font color="#JJ2350"><%= "Price: #{product.price}"%></font></div>
+						<div><%= truncate(product.description, :length => 10, :separator => '...')%></div>
+					</td>
+			<%end%>
+		</tr>
+	</table>
+	<%= will_paginate @products %>
+</div>
+<br/>
+

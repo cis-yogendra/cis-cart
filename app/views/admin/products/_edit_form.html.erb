@@ -1,0 +1,39 @@
+<div style = "margin-left:150px">
+<%= nested_form_for([@category,@product], :url => admin_product_url, :html => {:multipart => true}) do |f|%>
+  <ul>
+  	<% @product.errors.full_messages.each do |error|%>
+  	  <%= error %>
+  	<% end %>
+  </ul>
+
+  <p>
+    <%= f.label :category %>
+    <%= f.select :category_id , options_for_select(@categories.map{|c| [c.name , c.id]})  %>
+  </p>
+
+  <p class="tag">
+    <%= f.label :product_name %>
+    <%= f.text_field :product_name %>
+  </p>
+
+  <%= f.fields_for :pictures do |photo| %>
+    <p>
+      <%= photo.label :image %>
+      <%= photo.file_field :image %>
+      <%= photo.link_to_remove "Remove this image" %>
+    </p>
+  <%end%>
+  <p>
+  	<%= f.label :price %>
+  	<%= f.text_field :price %>
+  </p>
+  <p>
+  <%= f.label :description%>
+    <%= f.text_area :description , :cols => "50", :rows => "5"%>
+</p>
+<p><%= f.link_to_add "Add a image", :pictures %></p>
+  <p>
+  	<%= f.submit %>
+  </p>
+<% end %>
+</div>

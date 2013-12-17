@@ -1,0 +1,75 @@
+= ActiveMerchantEbs
+
+EBS integration for ActiveMerchant.
+
+== Installation
+
+=== Requirements
+
+You need to install the ActiveMerchant gem or rails plugin. More info about ActiveMerchant installation can be found at http://www.activemerchant.org.
+
+=== As a gem
+
+Install the gem [recommended]:
+
+  > gem install active_merchant_ebs  
+
+To use the ActiveMerchantEbs gem in a Rails 3 application, add the following line in your Gemfile:
+
+  gem 'active_merchant_ebs'
+
+== Configuration
+
+Create a merchant account with EBS.
+
+Then create an initializer, like initializers/payment.rb. Add the following lines:
+    ActiveMerchant::Billing::Integrations::Ebs.setup do |ebs|
+      ebs.account_id =  #your EBS account ID
+      ebs.mode = 'TEST' #EBS Mode 'TEST' or 'LIVE'
+      ebs.secret_key = 'your secret key' #Provided by EBS
+    end
+    EBS_ACCOUNT = 'youraccountname'
+
+If ActiveMerchant's actionview helpers don't load automatically, add the line in your initializer:
+
+  ActionView::Base.send :include, ActiveMerchant::Billing::Integrations::ActionViewHelper
+
+== Example Usage
+    <% payment_service_for @order.id, EBS_ACCOUNT,
+        :amount => @order.price_in_cents,
+        :service => :ebs do |service| %>    
+      <%  service.customer :name => @order.fullname,
+                           :email => "test@order.email" %>
+      <%  service.billing_address :city => "Bang",
+                                  :address1 => "@order.billing_address.address_line_1",
+                                  :state    => "@order.billing_address.state",
+                                  :pin      => "123456",
+                                  :country  => "IN",
+                                  :phone    => "9876543210" %>
+      <%  service.redirect :return_url => [orders_callback_url(@order),'DR={DR}'].join('?'),
+                           :order_id => @order.id,
+                           :order_desc => "@order.id" %>
+      <%= submit_tag 'Proceed to payment' %>
+    <% end %>
+
+In your controller
+    
+    def callback
+      @order   = Order.find(params[:id])
+      logger.debug params[:DR]
+      @notification = ActiveMerchant::Billing::Integrations::Ebs::Notification.new(params[:DR].to_s)
+      logger.debug "Success -- #{@notification.successful?}"
+      if @notification.successful?
+        render :action => 'success'
+      else
+        render :action => 'failure'
+      end
+    end      
+
+== Special Thanks
+
+This gem is heavily inspired by a similar integration done by Suman Debnath for CCavenue  @ https://github.com/meshbrain/active_merchant_ccavenue <br>
+Very special thanks to him.  
+
+== Copyright
+See LICENSE for details.

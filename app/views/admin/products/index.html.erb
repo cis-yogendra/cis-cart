@@ -1,0 +1,45 @@
+<div style="float: right;">
+	<div style = "margin-right:20px">
+		<%= form_tag admin_products_path, :method => 'get' do %>
+			<div style = "margin-left:15px;">
+			  <p>
+			    <%= text_field_tag :search, params[:search], :placeholder => "search products" %>
+			  </p>
+	  		</div>
+		<% end %>
+	</div>
+</div>
+<div style = "margin-left:150px">
+<h2><i><u><font color="#800000">List of Products :-</font></u></i></h2>		
+	<table cellspacing="10">
+		<tr>
+			<% @products.each_with_index do |product,index| %>
+				<% if (index%3) == 0 %>
+					</tr>
+					<tr>
+		    	<% end %>
+					<td style = "border: 1px solid black; padding: 50px;">
+						<div><font color="#800000"><%= (product.product_name)%></font></div><br/>
+					    <% product.pictures.each do |pik| %>
+							<div style = "width:100px">
+								<%= link_to image_tag(pik.image.url(:small)), admin_product_path(product) %>
+							</div>
+						<% end %>
+						<div><font color="#JJ2350"><%= "Price: #{product.price}"%></font></div>
+						<div><%= truncate(product.description, :length => 20, :separator => '...')%></div>
+						<div><%= link_to 'Destroy', admin_product_path(product), :confirm => 'Are you sure?',:method => :delete, :class => 'btn btn-mini btn-danger' %>&nbsp;&nbsp;
+						<%= link_to "Edit", edit_admin_product_path(product),:remote => true, :class => 'btn btn-mini' %></div>
+					</td>
+			<%end%>
+		</tr>
+	</table><br/>
+	<div style = "margin-left:250px">
+	<%= button_to "Add Products", new_admin_product_path, :id => "open-contacts-dialog-btn",
+      :class => "inbox-sf-add-btn tip", :method => :get, :class => 'btn btn-primary' %>
+</div>
+	<%= will_paginate @products %>
+</div>
+
+<br/>
+
+<div id='edit_form'>  </div>

@@ -1,0 +1,90 @@
+<div id = "flip"><u><font color="#800000">Customer Details: </font></u>
+	<p id = "test">
+		<table cellspacing="5">
+			<tr>
+				<td style = "border: 1px solid black; padding: 10px;">
+					<ul>
+						<li>
+							<b>Name:</b>
+							<%=@order.name%>
+						</li>
+						<li>
+							<b>Email:</b>
+							<%=@order.email%>
+						</li>
+						<li>
+							<b>Pay_type:</b>
+							<%=@order.pay_type%>
+						</li>
+						<li>
+							<b>Address:</b>
+							<%=@order.address%>
+						</li>
+						<li>
+							<b>Address_latitude:</b>
+							<%=@order.address_latitude%>
+						</li>
+						<li>
+							<b>Address_longitude:</b>
+							<%=@order.address_longitude%>
+						</li>
+						<li>
+							<b>Order_token: </b>
+							<%=@order.order_token%>
+						</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	<p>
+</div>
+<% @order.products.each do |product| %>
+	<td style = "border: 1px solid black; padding: 50px;">
+		<div><font color="#800000"><%= "Product_name: #{product.product_name}"%></font></div><br/>
+		<% product.pictures.each do |photo| %>
+			<div style = "width:100px">
+				<%= link_to image_tag(photo.image(:large)), product_path(product) %>
+			</div>
+		<%end%>
+    	<%= product.description %>
+		<%= product.price %>
+	</td>
+<% end %>
+
+
+
+<%= link_to "Checkout", @order.paypal_url(products_url) %>
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="58S69HPDF2BJJ">
+<table>
+<tr><td><input type="hidden" name="on0" value="Check">Check</td></tr><tr><td><select name="os0">
+	<option value="Visa">credit card</option>
+	<option value="credit card">Visa </option>
+	<option value="Purchase order">Purchase order </option>
+</select> </td></tr>
+</table>
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+   $("#flip").click(function(){
+   	$("#test").slideToggle("slow");
+   });
+});
+</script>
+</head>
+</html>
+
