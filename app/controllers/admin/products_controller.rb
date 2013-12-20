@@ -1,5 +1,5 @@
 class Admin::ProductsController < ApplicationController
-	before_filter :authenticate_admin
+	# before_filter :authenticate_admin
 	layout 'admin'
 	def index
 		@products = Product.paginate(:page => params[:page], :per_page => 9).search(params[:search])

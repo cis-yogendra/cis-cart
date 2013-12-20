@@ -21,9 +21,9 @@ class ApplicationController < ActionController::Base
 
 	protected 
 
-	def authenticate_admin
-    unless current_user.try(:is_admin?)      
-      redirect_to :root_url , :alert => 'Vissible only for admin'
-    end
-	end  	
+	# def authenticate_admin
+ #    unless current_user.try(:is_admin?)      
+ #      redirect_to :root_url , :alert => 'Vissible only for admin'
+ #    end
+	# end  	
 end

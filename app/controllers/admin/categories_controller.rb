@@ -1,5 +1,5 @@
 class Admin::CategoriesController < ApplicationController
-	before_filter :authenticate_admin
+	# before_filter :authenticate_admin
 	layout 'admin'
 	def index
 		@categories = Category.where(parent_id: nil).paginate(:page => params[:page], :per_page => 2).search(params[:search])

@@ -4,7 +4,7 @@ class CreateProducts < ActiveRecord::Migration
       t.integer :category_id
       t.integer :cart_id	
       t.string :image
-      t.string :price
+      t.string :price, :precision => 10, :scale => 2
       t.string :description
       t.timestamps
     end
