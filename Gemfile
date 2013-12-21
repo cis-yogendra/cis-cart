@@ -36,6 +36,7 @@ gem 'active_merchant_ebs'
 gem "nested_form"
 
 gem "haml-rails"
+gem 'activeadmin'
 
 #gem 'client_side_validations'
 # To use ActiveModel has_secure_password
